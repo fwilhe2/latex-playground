@@ -11,6 +11,7 @@ jobs:
       - name: Compile LaTeX document
         run: |
           docker run -t -v $PWD:/code docker.pkg.github.com/fwilhe2/latex-docker-image/latex:latest bash -c "pdflatex /code/doc.tex"
+          find .
       - uses: actions/upload-artifact@master
         with:
           name: doc
