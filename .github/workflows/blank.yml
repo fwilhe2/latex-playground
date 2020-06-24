@@ -8,6 +8,8 @@ jobs:
         uses: actions/checkout@v1
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+      - name: Pull image
+        run: docker pull docker.pkg.github.com/fwilhe2/latex-docker-image/latex:latest
       - name: Compile LaTeX document
         run: |
           docker run -t -v $PWD:/code docker.pkg.github.com/fwilhe2/latex-docker-image/latex:latest bash -c "cd /code; latexmk -pdf doc.tex"
