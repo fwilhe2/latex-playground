@@ -10,7 +10,7 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
       - name: Compile LaTeX document
         run: |
-          docker run -v $PWD:/code docker.pkg.github.com/fwilhe2/latex-docker-image/latex:latest bash -c "pdflatex doc.tex"
+          docker run -t -v $PWD:/code docker.pkg.github.com/fwilhe2/latex-docker-image/latex:latest bash -c "pdflatex /code/doc.tex"
       - uses: actions/upload-artifact@master
         with:
           name: doc
