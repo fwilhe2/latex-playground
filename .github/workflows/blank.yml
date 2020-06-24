@@ -16,4 +16,4 @@ jobs:
       - uses: actions/upload-artifact@master
         with:
           name: doc
-          path: doc.pdf
+          path: doc.*
