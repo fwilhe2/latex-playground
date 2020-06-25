@@ -9,11 +9,14 @@ jobs:
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
       - name: Pull image
-        run: docker pull docker.pkg.github.com/fwilhe2/latex-docker-image/latex:latest
+        run: |
+            docker pull docker.pkg.github.com/fwilhe2/latex-docker-image/latex:latest
+            docker tag docker.pkg.github.com/fwilhe2/latex-docker-image/latex:latest myimg
   build:
     needs: pull
     runs-on: ubuntu-latest
-    container: docker.pkg.github.com/fwilhe2/latex-docker-image/latex:latest
+    container:
+      image: myimg
     steps:
       - name: Compile LaTeX document
         run: |
