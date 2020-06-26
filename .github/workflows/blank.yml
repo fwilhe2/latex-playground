@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     container: fwilhe/latex
     steps:
+      - uses: actions/checkout@v2
       - name: Compile LaTeX document
         run: |
           latexmk -pdf doc.tex
