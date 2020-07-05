@@ -1,15 +1,17 @@
-name: Build LaTeX document
+
+
 on: [push]
+
 jobs:
-  build:
+  latex-job:
     runs-on: ubuntu-latest
-    container: fwilhe/latex
+    name: A job to Compile Latex file
     steps:
-      - uses: actions/checkout@v2
-      - name: Compile LaTeX document
-        run: |
-          latexmk -pdf doc.tex
-      - uses: actions/upload-artifact@master
-        with:
-          name: doc
-          path: doc.*
+    - uses: actions/checkout@v1
+    - name: Compilation
+      uses: vinay0410/tectonic-action@master
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tex_path: 'doc.tex'
+        push: 'yes'
